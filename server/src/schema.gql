@@ -1,3 +1,48 @@
 type Query {
-  hello: String
+  people: [Person!]!
+}
+
+type Mutation {
+  addPerson(person: PersonInput!): [Person!]!
+  removePerson(id: ID!): [Person!]!
+  updatePerson(id: ID!, person: PersonInput!): [Person!]!
+}
+
+type Person {
+  id: ID
+  birthYear: String
+  eyeColor: String
+  films:  [Int!]!
+  gender: String
+  hairColor: String
+  height: String
+  homeworld: Int
+  mass: String
+  name: String
+  skinColor: String
+  created: String
+  edited: String
+  species:  [Int!]!
+  starships:  [Int!]!
+  url: String
+  vehicles: [Int!]!
+}
+
+input PersonInput {
+  birthYear: String
+  eyeColor: String
+  films:  [Int!]!
+  gender: String
+  hairColor: String
+  height: String
+  homeworld: Int
+  mass: String
+  name: String
+  skinColor: String
+  created: String
+  edited: String
+  species:  [Int!]!
+  starships:  [Int!]!
+  url: String
+  vehicles: [Int!]!
 }
