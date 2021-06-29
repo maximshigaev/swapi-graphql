@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "apollo-server-express": "2.25.2",
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "rimraf": "3.0.2"
   },
   "devDependencies": {
     "@babel/core": "7.14.6",
@@ -16,7 +17,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-watch ./src/index.js"
+    "start": "npm run clean &&  babel-watch ./src/index.js",
+    "clean": "rimraf ./node_modules/.cache/babel-loader"
   },
   "keywords": [],
   "author": "",

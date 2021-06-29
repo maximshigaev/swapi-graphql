@@ -1,0 +1,20 @@
+query people($pageNumber: Int) {
+  people(pageNumber: $pageNumber) {
+    birthYear
+    eyeColor
+    films
+    gender
+    hairColor
+    height
+    homeworld
+    mass
+    name
+    skinColor
+    created
+    edited
+    species
+    starships
+    url
+    vehicles
+  }
+}
