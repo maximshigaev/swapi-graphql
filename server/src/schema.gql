@@ -1,5 +1,5 @@
 type Query {
-  people: [Person!]!
+  people(pageNumber: Int): [Person!]!
 }
 
 type Mutation {

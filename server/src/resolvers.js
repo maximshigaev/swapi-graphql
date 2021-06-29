@@ -3,7 +3,7 @@ import { getPeople, addPerson, removePerson, updatePerson } from './model';
 
 export const resolvers = {
   Query: {
-    people: () => getPeople(),
+    people: (_, { pageNumber }) => getPeople(pageNumber),
   },
   Mutation: {
     addPerson: (_, { person }) => addPerson(person),
