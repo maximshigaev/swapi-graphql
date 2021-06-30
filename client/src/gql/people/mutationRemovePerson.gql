@@ -1,5 +1,5 @@
-query people($pageNumber: Int) {
-  people(pageNumber: $pageNumber) {
+mutation removePerson($id: ID!) {
+  removePerson(id: $id) {
     id
     birthYear
     eyeColor
