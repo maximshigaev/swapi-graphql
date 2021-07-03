@@ -13,20 +13,23 @@ import styles from './person.module.scss';
 // Interfaces
 import { IPerson } from '../../interfaces';
 
+// Client
+import { client } from '../../init/client';
+
 // Mutations
 const mutationRemovePerson = loader('../../gql/people/mutationRemovePerson.gql');
 
 interface IProps {
   person: IPerson;
+  pageNumber: number;
 }
 
-export const Person: FC<IProps> = ({ person }) => {
+export const Person: FC<IProps> = ({ person, pageNumber }) => {
   const [
     removePerson,
     {
       loading: isPersonRemoving,
       error: removePersonError,
-      data: removePersonData,
     },
   ] = useMutation(mutationRemovePerson);
 
@@ -35,8 +38,11 @@ export const Person: FC<IProps> = ({ person }) => {
     removePerson({
       variables: {
         id,
+        pageNumber,
       }
     });
+
+    client.clearStore();
   }
 
   if (isPersonRemoving) {
@@ -54,8 +60,6 @@ export const Person: FC<IProps> = ({ person }) => {
       </Empty>
     );
   }
-
-  if (removePersonData) return null;
 
   return (
     <div className={styles.person}>

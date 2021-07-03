@@ -1,0 +1,12 @@
+mutation addPerson($person: PersonInput!, $pageNumber: Int!) {
+  addPerson(person: $person, pageNumber: $pageNumber) {
+    id
+    birthYear
+    eyeColor
+    gender
+    hairColor
+    height
+    name
+    skinColor
+  }
+}

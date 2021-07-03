@@ -1,21 +1,12 @@
-mutation removePerson($id: ID!) {
-  removePerson(id: $id) {
+mutation removePerson($id: ID!, $pageNumber: Int!) {
+  removePerson(id: $id, pageNumber: $pageNumber) {
     id
     birthYear
     eyeColor
-    films
     gender
     hairColor
     height
-    homeworld
-    mass
     name
     skinColor
-    created
-    edited
-    species
-    starships
-    url
-    vehicles
   }
 }
