@@ -13,27 +13,44 @@ import { Loader } from '../';
 // Styles
 import styles from './personModal.module.scss';
 
+// Interfaces
+import { IPerson } from '../../interfaces';
+
 // Client
 import { client } from '../../init/client';
 
 // Mutations
 const mutationAddPerson = loader('../../gql/people/mutationAddPerson.gql');
+const mutationUpdatePerson = loader('../../gql/people/mutationUpdatePerson.gql');
 
 interface IProps {
   onCloseBtnClick: () => void;
   pageNumber: number;
+  person?: IPerson;
 }
 
-export const PersonModal: FC<IProps> = ({ onCloseBtnClick: handleCloseBtnClick, pageNumber }) => {
-  const initialValues = {
-    name: '',
-    gender: '',
-    birthYear: '',
-    eyeColor: '',
-    hairColor: '',
-    height: '',
-    skinColor: '',
-  }
+export const PersonModal: FC<IProps> = ({ onCloseBtnClick: handleCloseBtnClick, pageNumber, person }) => {
+  const { name, gender, birthYear, eyeColor, hairColor, height, skinColor } = person || {};
+
+  const initialValues = person
+    ? {
+      name,
+      gender,
+      birthYear,
+      eyeColor,
+      hairColor,
+      height,
+      skinColor,
+    }
+    : {
+      name: '',
+      gender: '',
+      birthYear: '',
+      eyeColor: '',
+      hairColor: '',
+      height: '',
+      skinColor: '',
+    };
 
   const validationSchema = Yup.object().shape({
     name: Yup
@@ -69,18 +86,38 @@ export const PersonModal: FC<IProps> = ({ onCloseBtnClick: handleCloseBtnClick, 
     onCompleted: handleCloseBtnClick,
   });
 
+  const [
+    updatePerson,
+    {
+      loading: isPersonUpdating,
+      error: updatePersonError,
+    },
+  ] = useMutation(mutationUpdatePerson, {
+    onCompleted: handleCloseBtnClick,
+  });
+
   const handleSubmitBtnClick = (values: any) => {
-    addPerson({
-      variables: {
-        person: values,
-        pageNumber,
-      },
-    });
+    if (person) {
+      updatePerson({
+        variables: {
+          id: person.id,
+          person: values,
+          pageNumber,
+        }
+      });
+    } else {
+      addPerson({
+        variables: {
+          person: values,
+          pageNumber,
+        },
+      });
+    }
 
     client.clearStore();
   }
 
-  if (isPersonAdding) {
+  if (isPersonAdding || isPersonUpdating) {
     return (
       <Loader>
         Adding the person...
@@ -88,10 +125,10 @@ export const PersonModal: FC<IProps> = ({ onCloseBtnClick: handleCloseBtnClick, 
     );
   }
 
-  if (addPersonError) {
+  if (addPersonError || updatePersonError) {
     return (
       <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}>
-        There was an error during the person adding
+        There was an error during the person {person ? 'Editing' : 'Adding'}
       </Empty>
     );
   }
@@ -182,7 +219,7 @@ export const PersonModal: FC<IProps> = ({ onCloseBtnClick: handleCloseBtnClick, 
               </Col>
             </Row>
             <SubmitButton>
-              Add the person
+              {person ? 'Edit the person' : 'Add the person'}
             </SubmitButton>
           </Form>
         )}

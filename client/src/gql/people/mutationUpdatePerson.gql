@@ -1,0 +1,12 @@
+mutation updatePerson($id: ID!, $person: PersonInput!, $pageNumber: Int!) {
+  updatePerson(id: $id, person: $person, pageNumber: $pageNumber) {
+    id
+    birthYear
+    eyeColor
+    gender
+    hairColor
+    height
+    name
+    skinColor
+  }
+}

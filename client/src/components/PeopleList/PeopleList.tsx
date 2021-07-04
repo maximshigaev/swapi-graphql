@@ -29,7 +29,7 @@ export const PeopleList: FC<IProps> = ({ peopleInfo, setPeopleInfo }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const { loading, error, people } = peopleInfo;
+  const { loading, people } = peopleInfo;
 
   const { loading: initialLoading, error: initialError, data: initialData } = useQuery(queryPeople, {
     variables: {

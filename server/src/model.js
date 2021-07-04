@@ -849,7 +849,7 @@ export const updatePerson = (id, person) => {
   peopleDB = [
     ...peopleDB.slice(0, updatingPersonIndex),
     {
-      id,
+      id: +id,
       ...person,
     },
     ...peopleDB.slice(updatingPersonIndex + 1),

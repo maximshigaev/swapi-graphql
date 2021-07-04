@@ -1,11 +1,11 @@
-import { FC } from 'react';
-import { DeleteFilled } from '@ant-design/icons';
+import { FC, useState } from 'react';
+import { DeleteFilled, EditFilled } from '@ant-design/icons';
 import { loader } from 'graphql.macro';
 import { useMutation } from '@apollo/react-hooks';
 import { Empty } from 'antd';
 
 // Components
-import { Loader } from '../';
+import { Loader, PersonModal } from '../';
 
 // Styles
 import styles from './person.module.scss';
@@ -25,6 +25,8 @@ interface IProps {
 }
 
 export const Person: FC<IProps> = ({ person, pageNumber }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   const [
     removePerson,
     {
@@ -43,6 +45,14 @@ export const Person: FC<IProps> = ({ person, pageNumber }) => {
     });
 
     client.clearStore();
+  }
+
+  const handleUpdatePersonBtnClick = (id: number) => {
+    setIsModalVisible(true);
+  }
+
+  const handleCloseBtnClick = () => {
+    setIsModalVisible(false);
   }
 
   if (isPersonRemoving) {
@@ -74,6 +84,17 @@ export const Person: FC<IProps> = ({ person, pageNumber }) => {
         className={styles['person-delete-btn']}
         onClick={() => handleRemovePersonBtnClick(id)}
       />
+      <EditFilled
+        className={styles['person-edit-btn']}
+        onClick={() => handleUpdatePersonBtnClick(id)}
+      />
+      {isModalVisible && (
+        <PersonModal
+          pageNumber={pageNumber}
+          person={person}
+          onCloseBtnClick={handleCloseBtnClick}
+        />
+      )}
     </div>
   );
 }
