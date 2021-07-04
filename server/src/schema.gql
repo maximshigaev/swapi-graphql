@@ -5,7 +5,7 @@ type Query {
 type Mutation {
   addPerson(person: PersonInput!, pageNumber: Int!): [Person!]!
   removePerson(id: ID!, pageNumber: Int!): [Person!]!
-  updatePerson(id: ID!, person: PersonInput!): [Person!]!
+  updatePerson(id: ID!, person: PersonInput!, pageNumber: Int!): [Person!]!
 }
 
 type Person {

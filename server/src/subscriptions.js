@@ -8,7 +8,8 @@ export const subscriptions = {
   peopleUpdated: {
     subscribe: () => pubSub.asyncIterator([
       events.PERSON_ADDED,
-      events.PERSON_REMOVED,  
+      events.PERSON_REMOVED,
+      events.PERSON_UPDATED, 
     ]),
   }
 }

@@ -33,7 +33,15 @@ export const resolvers = {
 
       return people;
     },
-    updatePerson: (_, { id, person }) => updatePerson(id, person),
+    updatePerson: (_, { id, person, pageNumber }) => {
+      const people = updatePerson(id, person);
+
+      pubSub.publish(events.PERSON_UPDATED, {
+        peopleUpdated: people.slice((pageNumber - 1) * 10, pageNumber * 10),
+      });
+
+      return people;
+    },
   },
   Subscription: {
     ...personSubscriptions,
