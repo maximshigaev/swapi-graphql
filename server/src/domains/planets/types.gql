@@ -1,0 +1,7 @@
+type Planet {
+  name: String
+  climate: String
+  diameter: Int
+  population: Int
+  terrain: String
+}

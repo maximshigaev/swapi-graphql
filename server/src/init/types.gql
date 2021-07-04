@@ -1,7 +1,9 @@
 #import "../domains/people/types.gql"
+#import "../domains/planets/types.gql"
 
 type Query {
   people(pageNumber: Int): [Person!]!
+  planets(pageNumber: Int): [Planet!]!
 }
 
 type Mutation {

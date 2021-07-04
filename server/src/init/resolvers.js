@@ -1,5 +1,6 @@
 // Queries
 import { queries as peopleQueries } from '../domains/people/queries';
+import { queries as planetsQueries } from '../domains/planets/queries';
 
 // Mutations
 import { mutations as peopleMutations } from '../domains/people/mutations';
@@ -10,6 +11,7 @@ import { subscriptions as peopleSubscriptions } from '../domains/people/subscrip
 export const resolvers = {
   Query: {
     ...peopleQueries,
+    ...planetsQueries,
   },
   Mutation: {
     ...peopleMutations,

@@ -1,8 +1,14 @@
 {
   "presets": [
-    "@babel/preset-env"
+    [
+      "latest-node",
+      {
+        "target": "current"
+      }
+    ]
   ],
   "plugins": [
-    "import-graphql"
+    "import-graphql",
+    "@babel/transform-runtime"
   ]
 }

@@ -8,11 +8,19 @@ import schema from './types.gql';
 // Resolvers
 import { resolvers } from './resolvers';
 
+// Api
+import { api as planetsAPI } from '../domains/planets/dataSource';
+
 const app = express();
 
 const server = new ApolloServer({
   typeDefs: schema,
   resolvers,
+  dataSources: () => {
+    return {
+      planetsAPI,
+    };
+  },
 });
 
 server.applyMiddleware({ app });
