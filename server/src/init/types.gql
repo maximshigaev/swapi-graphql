@@ -1,3 +1,5 @@
+#import "../domains/people/types.gql"
+
 type Query {
   people(pageNumber: Int): [Person!]!
 }
@@ -6,27 +8,6 @@ type Mutation {
   addPerson(person: PersonInput!, pageNumber: Int!): [Person!]!
   removePerson(id: ID!, pageNumber: Int!): [Person!]!
   updatePerson(id: ID!, person: PersonInput!, pageNumber: Int!): [Person!]!
-}
-
-type Person {
-  id: ID
-  birthYear: String
-  eyeColor: String
-  gender: String
-  hairColor: String
-  height: Int
-  name: String
-  skinColor: String
-}
-
-input PersonInput {
-  birthYear: String
-  eyeColor: String
-  gender: String
-  hairColor: String
-  height: Int
-  name: String
-  skinColor: String
 }
 
 type Subscription {

@@ -1,8 +1,8 @@
 // Pubsub
-import { pubSub } from './init/pubSub';
+import { pubSub } from '../../init/pubSub';
 
 // Events
-import { events } from './events';
+import { events } from '../../events';
 
 export const subscriptions = {
   peopleUpdated: {

@@ -1,0 +1,20 @@
+type Person {
+  id: ID
+  birthYear: String
+  eyeColor: String
+  gender: String
+  hairColor: String
+  height: Int
+  name: String
+  skinColor: String
+}
+
+input PersonInput {
+  birthYear: String
+  eyeColor: String
+  gender: String
+  hairColor: String
+  height: Int
+  name: String
+  skinColor: String
+}

@@ -3,10 +3,10 @@ import { ApolloServer } from 'apollo-server-express';
 import http from 'http';
 
 // Schema
-import schema from '../schema.gql';
+import schema from './types.gql';
 
 // Resolvers
-import { resolvers } from '../resolvers';
+import { resolvers } from './resolvers';
 
 const app = express();
 

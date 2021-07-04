@@ -821,6 +821,7 @@ let peopleDB = [
   }
 ];
 
+
 export const getPeople = (pageNumber) => peopleDB.slice((pageNumber - 1) * 10, pageNumber * 10);
 
 export const addPerson = (person) => {
