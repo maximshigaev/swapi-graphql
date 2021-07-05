@@ -1,0 +1,9 @@
+query planets($pageNumber: Int){
+  planets(pageNumber: $pageNumber) {
+    name
+    climate
+    diameter
+    population
+    terrain
+  }
+}

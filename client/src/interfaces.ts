@@ -16,3 +16,11 @@ export interface IPeopleInfo {
   error: undefined | ApolloError;
   people: IPerson[];
 }
+
+export interface IPlanet {
+  name: string;
+  climate: string;
+  diameter: string;
+  population: string;
+  terrain: string;
+}

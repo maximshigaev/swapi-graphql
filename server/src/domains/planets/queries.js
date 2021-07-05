@@ -1,7 +1,13 @@
+import { ApolloError } from "apollo-server-errors";
+
 export const queries = {
   planets: async (_, { pageNumber }, { dataSources }) => {
-    const { results } = await dataSources.planetsAPI.getPlanets(pageNumber);
+    try {
+      const { results } = await dataSources.planetsAPI.getPlanets(pageNumber);
 
-    return results;
+      return results;
+    } catch {
+      throw new ApolloError('There are no planets for this page');
+    }
   },
 }

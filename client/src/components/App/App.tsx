@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { Collapse } from 'antd';
 
 // Components
-import { PeopleList } from '../';
+import { PeopleList, PlanetsList } from '../';
 
 // Interfaces
 import { IPeopleInfo } from '../../interfaces';
@@ -17,8 +17,14 @@ export const App: FC = () => {
   return (
     <Collapse defaultActiveKey={['1']}>
       <Collapse.Panel
-        header="People"
+        header="Planets"
         key="1"
+      >
+        <PlanetsList />
+      </Collapse.Panel>
+      <Collapse.Panel
+        header="People"
+        key="2"
       >
         <PeopleList
           peopleInfo={peopleInfo}

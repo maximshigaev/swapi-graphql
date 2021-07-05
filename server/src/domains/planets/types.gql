@@ -1,7 +1,7 @@
 type Planet {
   name: String
   climate: String
-  diameter: Int
-  population: Int
+  diameter: String
+  population: String
   terrain: String
 }
