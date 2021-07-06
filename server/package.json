@@ -7,7 +7,10 @@
     "apollo-datasource-rest": "0.14.0",
     "apollo-server-errors": "2.5.0",
     "apollo-server-express": "2.25.2",
+    "cors": "2.8.5",
     "express": "4.17.1",
+    "express-session": "1.17.2",
+    "jsonwebtoken": "8.5.1",
     "rimraf": "3.0.2"
   },
   "devDependencies": {

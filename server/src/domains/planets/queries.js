@@ -1,4 +1,4 @@
-import { ApolloError } from "apollo-server-errors";
+import { ApolloError } from 'apollo-server-errors';
 
 export const queries = {
   planets: async (_, { pageNumber }, { dataSources }) => {

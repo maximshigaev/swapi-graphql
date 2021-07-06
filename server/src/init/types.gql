@@ -1,15 +1,19 @@
 #import "../domains/people/types.gql"
 #import "../domains/planets/types.gql"
+#import "../domains/users/types.gql"
 
 type Query {
   people(pageNumber: Int): [Person!]!
   planets(pageNumber: Int): [Planet!]!
+  users: [User!]!
 }
 
 type Mutation {
   addPerson(person: PersonInput!, pageNumber: Int!): [Person!]!
   removePerson(id: ID!, pageNumber: Int!): [Person!]!
   updatePerson(id: ID!, person: PersonInput!, pageNumber: Int!): [Person!]!
+  signUp(name: String!, email: String!, password: String!): User!
+  login(name: String!, password: String!): User
 }
 
 type Subscription {
