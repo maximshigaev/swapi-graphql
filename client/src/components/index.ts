@@ -5,3 +5,5 @@ export { Loader } from './Loader';
 export { PersonModal } from './PersonModal';
 export { PlanetsList } from './PlanetsList';
 export { Planet } from './Planet';
+export { MainPage } from './MainPage';
+export { LoginPage } from './LoginPage';

@@ -1,36 +1,30 @@
 import { FC, useState } from 'react';
-import { Collapse } from 'antd';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 // Components
-import { PeopleList, PlanetsList } from '../';
-
-// Interfaces
-import { IPeopleInfo } from '../../interfaces';
+import { MainPage, LoginPage } from '../';
 
 export const App: FC = () => {
-  const [peopleInfo, setPeopleInfo] = useState<IPeopleInfo>({
-    loading: false,
-    error: undefined,
-    people: [],
-  });
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
   return (
-    <Collapse defaultActiveKey={['1']}>
-      <Collapse.Panel
-        header="Planets"
-        key="1"
+    <Switch>
+      <Route
+        path={`${process.env.PUBLIC_URL}/`}
+        exact
       >
-        <PlanetsList />
-      </Collapse.Panel>
-      <Collapse.Panel
-        header="People"
-        key="2"
+        <MainPage isAuthorized={isAuthorized} />
+      </Route>
+      <Route
+        path={`${process.env.PUBLIC_URL}/login`}
+        exact
       >
-        <PeopleList
-          peopleInfo={peopleInfo}
-          setPeopleInfo={setPeopleInfo}
+        <LoginPage
+          isAuthorized={isAuthorized}
+          onSuccess={setIsAuthorized}
         />
-      </Collapse.Panel>
-    </Collapse>
+      </Route>
+      <Redirect to={`${process.env.PUBLIC_URL}/`} />
+    </Switch>
   );
 }
