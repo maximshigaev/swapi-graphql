@@ -2,10 +2,13 @@ import { FC, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 // Components
-import { MainPage, LoginPage } from '../';
+import { MainPage, LoginPage, SignupPage } from '../';
+
+// Interfaces
+import { IUser } from '../../interfaces';
 
 export const App: FC = () => {
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [authorizedUser, setAuthorizedUser] = useState<IUser | null>(null);
 
   return (
     <Switch>
@@ -13,15 +16,27 @@ export const App: FC = () => {
         path={`${process.env.PUBLIC_URL}/`}
         exact
       >
-        <MainPage isAuthorized={isAuthorized} />
+        <MainPage
+          onLogout={setAuthorizedUser}
+          authorizedUser={authorizedUser}
+        />
       </Route>
       <Route
         path={`${process.env.PUBLIC_URL}/login`}
         exact
       >
         <LoginPage
-          isAuthorized={isAuthorized}
-          onSuccess={setIsAuthorized}
+          authorizedUser={authorizedUser}
+          onLogin={setAuthorizedUser}
+        />
+      </Route>
+      <Route
+        path={`${process.env.PUBLIC_URL}/signup`}
+        exact
+      >
+        <SignupPage
+          authorizedUser={authorizedUser}
+          onSignup={setAuthorizedUser}
         />
       </Route>
       <Redirect to={`${process.env.PUBLIC_URL}/`} />

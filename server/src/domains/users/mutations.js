@@ -9,16 +9,22 @@ import { USER_SECRET } from '../../init/config';
 
 export const mutations = {
   signUp: (_, user) => {
-    db.push(user);
+    const existedUser = db.find(({ name, email }) => (user.name === name) && (user.email === email));
 
-    return user;
+    if (!existedUser) {
+      db.push(user);
+
+      return user;
+    } else {
+      throw new AuthenticationError('The user with these name and email has already exists. Please, log in');
+    }
   },
   login: (_, { name, password }, ctx) => {
     const user = db.find((currentUser) => currentUser.name === name);
     const isUserValid = user && (user.password === password);
 
     if (!user) {
-      throw new AuthenticationError('The user with this name does not exist');
+      throw new AuthenticationError('The user with this name does not exist. Please, sign up');
     }
 
     if (!isUserValid) {

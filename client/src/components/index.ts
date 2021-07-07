@@ -7,3 +7,4 @@ export { PlanetsList } from './PlanetsList';
 export { Planet } from './Planet';
 export { MainPage } from './MainPage';
 export { LoginPage } from './LoginPage';
+export { SignupPage } from './SignupPage';

@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+}
+
+.logout-btn {
+  color: #fff;
+  background: #1890ff;
+  border-color: #1890ff;
+  height: 32px;
+  padding: 4px 15px;
+  margin-left: 20px;
+}

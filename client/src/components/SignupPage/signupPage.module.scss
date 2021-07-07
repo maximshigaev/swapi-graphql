@@ -1,4 +1,4 @@
-.login-page {
+.signup-page {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -7,17 +7,17 @@
   flex-direction: column;
 }
 
-.error-message {
-  color: red;
-}
-
 .btn-wrapper {
   display: flex;
   justify-content: space-between;
 }
 
-.signup-btn {
+.login-btn {
   border: 1px solid black;
   padding: 4px 10px;
   border-radius: 3px;
+}
+
+.error-message {
+  color: red;
 }

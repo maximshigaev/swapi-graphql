@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { Redirect, Link } from 'react-router-dom';
 
 // Styles
-import styles from './loginPage.module.scss';
+import styles from './signupPage.module.scss';
 
 // Components
 import { Loader } from '../';
@@ -16,25 +16,29 @@ import { Loader } from '../';
 import { IUser } from '../../interfaces';
 
 // Mutations
-const mutationLogin = loader('../../gql/users/mutationLogin.gql');
+const mutationSignup = loader('../../gql/users/mutationSignup.gql');
 
 interface IProps {
-  onLogin: (authorizedUser: IUser) => void;
+  onSignup: (authorizedUser: IUser) => void;
   authorizedUser: IUser | null;
 }
 
-export const LoginPage: FC<IProps> = ({ onLogin, authorizedUser }) => {
-  const [login, { loading, error, data }] = useMutation(mutationLogin, {
+export const SignupPage: FC<IProps> = ({ authorizedUser, onSignup }) => {
+  const [signup, { loading, error, data }] = useMutation(mutationSignup, {
     onError: () => { },
   });
 
   const initialValues = {
     name: '',
+    email: '',
     password: '',
   }
 
   const validationSchema = Yup.object().shape({
     name: Yup
+      .string()
+      .required('Required'),
+    email: Yup
       .string()
       .required('Required'),
     password: Yup
@@ -43,7 +47,7 @@ export const LoginPage: FC<IProps> = ({ onLogin, authorizedUser }) => {
   });
 
   const handleSubmitBtnClick = (values: any) => {
-    login({
+    signup({
       variables: values,
     });
   }
@@ -54,21 +58,21 @@ export const LoginPage: FC<IProps> = ({ onLogin, authorizedUser }) => {
 
   if (loading) {
     return (
-      <div className={styles['login-page']}>
+      <div className={styles['signup-page']}>
         <Loader>
-          Trying to login...
+          Trying to signup...
         </Loader>
       </div>
     );
   }
 
   if (data) {
-    onLogin(data.login);
+    onSignup(data.signUp);
     return <Redirect to={`${process.env.PUBLIC_URL}/`} />;
   }
 
   return (
-    <div className={styles['login-page']}>
+    <div className={styles['signup-page']}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -86,6 +90,15 @@ export const LoginPage: FC<IProps> = ({ onLogin, authorizedUser }) => {
               />
             </FormItem>
             <FormItem
+              label="Email"
+              name="email"
+            >
+              <Input
+                name="email"
+                placeholder="Enter the email"
+              />
+            </FormItem>
+            <FormItem
               label="Password"
               name="password"
             >
@@ -96,13 +109,13 @@ export const LoginPage: FC<IProps> = ({ onLogin, authorizedUser }) => {
             </FormItem>
             <div className={styles['btn-wrapper']}>
               <SubmitButton>
-                Login
+                Signup
               </SubmitButton>
               <Link
-                className={styles['signup-btn']}
-                to={`${process.env.PUBLIC_URL}/signup`}
+                className={styles['login-btn']}
+                to={`${process.env.PUBLIC_URL}/login`}
               >
-                Signup
+                Login
               </Link>
             </div>
           </Form>
